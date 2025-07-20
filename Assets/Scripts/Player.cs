@@ -10,20 +10,20 @@ public class Player : MonoBehaviour
     SpriteRenderer spriter;
     Animator anim;
 
-    void Start()
+    private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         anim.SetFloat("Speed", inputVec.magnitude);
 
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
             spriter.flipX = inputVec.x < 0;
     }
 
-    void OnMove(InputValue value)
+    private void OnMove(InputValue value)
     {
         inputVec = value.Get<Vector2>();
     }
