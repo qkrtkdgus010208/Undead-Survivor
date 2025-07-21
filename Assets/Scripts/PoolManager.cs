@@ -23,7 +23,7 @@ public class PoolManager : MonoBehaviour
     {
         GameObject select = null;
 
-        // ... 선택한 풀의 놀고 (비홀성화 된) 있는 게임오브젝트 접근
+        // ... 선택한 풀의 놀고 (비활성화 된) 있는 게임오브젝트 접근
         foreach (GameObject item in pools[index])
         {
             if (!item.activeSelf)
