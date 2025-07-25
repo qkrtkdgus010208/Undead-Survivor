@@ -13,12 +13,7 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponentInParent<Player>();
-    }
-
-    private void Start()
-    {
-        Init();
+        player = GameManager.instance.player;
     }
 
     private void Update()
@@ -53,25 +48,48 @@ public class Weapon : MonoBehaviour
         this.count += count;
 
         if (id == 0)
-            Batch();
+            Equip();
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
-    public void Init()
+    public void Init(ItemData data)
     {
+        // Basic Set
+        name = $"Weapon {data.itemId}";
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        // Property Set
+        id = data.itemId;
+        damage = data.baseDamage;
+        count = data.baseCount;
+
+        for (int i = 0; i < GameManager.instance.pool.prefabs.Length; i++)
+        {
+            if (data.projectile == GameManager.instance.pool.prefabs[i])
+            {
+                prefabId = i;
+                break;
+            }
+        }
+
         switch (id)
         {
             case 0:
                 speed = 150;
-                Batch();
+                Equip();
                 break;
 
             default:
-                speed = 0.3f;
+                speed = 0.4f;
                 break;
         }
+
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
-    private void Batch()
+    private void Equip()
     {
         for (int index = 0; index < count; index++)
         {
@@ -109,6 +127,6 @@ public class Weapon : MonoBehaviour
         bullet.parent = transform;
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-        bullet.GetComponent<Bullet>().Init(damage, count, dir); 
+        bullet.GetComponent<Bullet>().Init(damage, count, dir);
     }
 }
