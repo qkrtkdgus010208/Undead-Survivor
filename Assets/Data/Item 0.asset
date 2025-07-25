@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cad37c906bb08cd46a8cfa6785cfd13c, type: 3}
   m_Name: Item 0
   m_EditorClassIdentifier: 
-  Type: 0
+  itemType: 0
   itemId: 0
   itemName: "\uC0BD"
   itemDesc: 
@@ -27,3 +27,4 @@ MonoBehaviour:
   - 3
   counts: 0100000001000000010000000100000002000000
   projectile: {fileID: 8980437976855667293, guid: 92fe94e10dd2fbf44bc3ff419ae11741, type: 3}
+  hand: {fileID: 143021600, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
