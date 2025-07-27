@@ -52,8 +52,8 @@ public class Gear : MonoBehaviour
                     break;
 
                 default:
-                    speed = 150 * Character.WeaponRate;
-                    weapon.speed = speed * (speed - rate);
+                    speed = 0.5f * Character.WeaponRate;
+                    weapon.speed = speed * (1f - rate);
                     break;
             }
         }
